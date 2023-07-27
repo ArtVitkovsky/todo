@@ -92,3 +92,8 @@ def signupuser(request):
 def currenttodos(request):
     todos = Todo.objects.filter(user=request.user, datecomplited__isnull=True)
     return render(request, 'todo/currenttodos.html', {'todos': todos})
+
+
+def completedtodos(request):
+    todos = Todo.objects.filter(user=request.user, datecomplited__isnull=False).order_by('-datecomplited')
+    return render(request, 'todo/completedtodos.html', {'todos': todos})
